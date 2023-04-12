@@ -1,0 +1,22 @@
+version: "3.3"
+services:
+  backend:
+    image: gitlab.praktikum-services.ru:5050/std-011-065/momo-store/momo-backend:latest
+    container_name: backend
+    ports:
+      - "8081:8081"
+    networks:
+      - momo_network
+  frontend:
+    image: gitlab.praktikum-services.ru:5050/std-011-065/momo-store/momo-frontend:latest
+    container_name: frontend
+    ports:
+      - "443:443"
+#      - "80:80" # Только через SSL
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - momo_network
+networks:
+  momo_network:
+    driver: bridge 
